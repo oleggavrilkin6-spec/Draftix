@@ -1,1 +1,147 @@
 :root{--gold:#c9a25d;--bg:#0d1822;}*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:linear-gradient(#102435,#0b131b);color:#eee}.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at center,#27465e,#0b131b)}.hero:before{content:'';position:absolute;inset:-5%;background:radial-gradient(circle,#ffffff18,transparent 60%);animation:breathe 18s ease-in-out infinite}.overlay{position:absolute;inset:0;background:radial-gradient(circle,transparent 35%,#0009 100%)}.content{position:relative;text-align:center;animation:fade 1.5s}.content h1{font-size:clamp(56px,10vw,110px);letter-spacing:6px;color:var(--gold);text-shadow:0 4px 18px #000}.btn{display:inline-block;margin-top:24px;padding:16px 34px;border:1px solid var(--gold);border-radius:999px;color:#fff;text-decoration:none;transition:.3s}.btn:hover{background:var(--gold);color:#111;transform:translateY(-2px)}.scroll{margin-top:60px;font-size:42px;animation:bob 2s infinite}.panel{max-width:900px;margin:80px auto;padding:40px;border:1px solid #ffffff18;border-radius:18px;background:#ffffff0a;backdrop-filter:blur(6px)}footer{text-align:center;padding:40px}a{color:var(--gold)}@keyframes breathe{50%{transform:scale(1.05)}}@keyframes fade{from{opacity:0;transform:translateY(25px)}to{opacity:1}}@keyframes bob{50%{transform:translateY(10px)}}
+/* ===========================
+   DRAFTIX ATMOSPHERE v0.3
+=========================== */
+
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.atmosphere {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+/* Световые лучи */
+
+.light-rays {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent 40%,
+        rgba(255,210,120,0.08),
+        transparent 60%
+    );
+
+    animation: raysMove 18s infinite alternate ease-in-out;
+}
+
+
+@keyframes raysMove {
+
+    from {
+        transform: translateX(-30px);
+        opacity: .5;
+    }
+
+    to {
+        transform: translateX(30px);
+        opacity: .9;
+    }
+
+}
+
+
+/* Пыль */
+
+.dust-container {
+    position:absolute;
+    inset:0;
+}
+
+
+.dust {
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:rgba(255,255,255,.35);
+
+    border-radius:50%;
+
+    animation:
+    dustFloat linear infinite;
+}
+
+
+
+@keyframes dustFloat {
+
+    from {
+
+        transform:
+        translateY(0)
+        translateX(0);
+
+        opacity:0;
+
+    }
+
+
+    20% {
+
+        opacity:1;
+
+    }
+
+
+    80% {
+
+        opacity:.7;
+
+    }
+
+
+    to {
+
+        transform:
+        translateY(-120px)
+        translateX(40px);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* Плавное дыхание */
+
+.hero-background {
+
+    animation:
+    backgroundBreathing 25s infinite alternate ease-in-out;
+
+}
+
+
+@keyframes backgroundBreathing {
+
+
+    from {
+
+        transform:scale(1);
+
+    }
+
+
+    to {
+
+        transform:scale(1.04);
+
+    }
+
+}
