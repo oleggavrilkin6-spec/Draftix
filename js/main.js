@@ -89,3 +89,50 @@ ${y*20}px
 
 
 }
+// ========================
+// Scroll Reveal
+// ========================
+
+
+const revealElements =
+document.querySelectorAll(".reveal");
+
+
+
+function revealOnScroll(){
+
+
+const trigger =
+window.innerHeight * 0.85;
+
+
+
+revealElements.forEach(el=>{
+
+
+const top =
+el.getBoundingClientRect().top;
+
+
+
+if(top < trigger){
+
+el.classList.add("active");
+
+}
+
+
+});
+
+
+}
+
+
+
+window.addEventListener(
+"scroll",
+revealOnScroll
+);
+
+
+revealOnScroll();
