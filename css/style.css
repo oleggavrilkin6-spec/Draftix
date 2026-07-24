@@ -1,424 +1,446 @@
-:root{--gold:#c9a25d;--bg:#0d1822;}*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:linear-gradient(#102435,#0b131b);color:#eee}.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at center,#27465e,#0b131b)}.hero:before{content:'';position:absolute;inset:-5%;background:radial-gradient(circle,#ffffff18,transparent 60%);animation:breathe 18s ease-in-out infinite}.overlay{position:absolute;inset:0;background:radial-gradient(circle,transparent 35%,#0009 100%)}.content{position:relative;text-align:center;animation:fade 1.5s}.content h1{font-size:clamp(56px,10vw,110px);letter-spacing:6px;color:var(--gold);text-shadow:0 4px 18px #000}.btn{display:inline-block;margin-top:24px;padding:16px 34px;border:1px solid var(--gold);border-radius:999px;color:#fff;text-decoration:none;transition:.3s}.btn:hover{background:var(--gold);color:#111;transform:translateY(-2px)}.scroll{margin-top:60px;font-size:42px;animation:bob 2s infinite}.panel{max-width:900px;margin:80px auto;padding:40px;border:1px solid #ffffff18;border-radius:18px;background:#ffffff0a;backdrop-filter:blur(6px)}footer{text-align:center;padding:40px}a{color:var(--gold)}@keyframes breathe{50%{transform:scale(1.05)}}@keyframes fade{from{opacity:0;transform:translateY(25px)}to{opacity:1}}@keyframes bob{50%{transform:translateY(10px)}}
-/* ===========================
-   DRAFTIX ATMOSPHERE v0.3
-=========================== */
+/* =====================================================
+   DRAFTIX SIMPLE LANDING PAGE
+   Style
+===================================================== */
+
+
+/* RESET */
+
+*,
+*::before,
+*::after {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+
+body {
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    font-family:
+
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+
+    color: white;
+
+    background: #05070c;
+
+}
+
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+
+.background {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -3;
+
+
+    background-image:
+
+        url("../assets/background.jpg");
+
+
+    background-size: cover;
+
+    background-position: center;
+
+
+    animation:
+
+        backgroundMove 25s
+
+        infinite alternate
+
+        ease-in-out;
+
+
+}
+
+
+
+@keyframes backgroundMove {
+
+
+    from {
+
+        transform: scale(1);
+
+    }
+
+
+    to {
+
+        transform: scale(1.06);
+
+    }
+
+}
+
+
+
+/* Dark overlay */
+
+.background::after {
+
+
+    content: "";
+
+
+    position: absolute;
+
+    inset: 0;
+
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(0,0,0,0.25),
+
+            rgba(0,0,0,0.85)
+
+        );
+
+
+}
+
+
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+
+.particles {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events:none;
+
+}
+
+
+
+/* =====================================================
+   HERO
+===================================================== */
 
 
 .hero {
-    position: relative;
-    overflow: hidden;
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+    align-items:center;
+
+
+
+    text-align:center;
+
+
+
+    padding:40px;
+
+
+
 }
 
 
-.atmosphere {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
+
+/* =====================================================
+   LOGO
+===================================================== */
 
 
-/* Световые лучи */
+.logo {
 
-.light-rays {
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left: -10%;
 
-    background:
-    linear-gradient(
-        120deg,
-        transparent 40%,
-        rgba(255,210,120,0.08),
-        transparent 60%
+    width:min(
+
+        900px,
+
+        80vw
+
     );
 
-    animation: raysMove 18s infinite alternate ease-in-out;
-}
+
+    max-height:300px;
 
 
-@keyframes raysMove {
-
-    from {
-        transform: translateX(-30px);
-        opacity: .5;
-    }
-
-    to {
-        transform: translateX(30px);
-        opacity: .9;
-    }
-
-}
+    object-fit:contain;
 
 
-/* Пыль */
 
-.dust-container {
-    position:absolute;
-    inset:0;
-}
+    opacity:0;
 
 
-.dust {
-    position:absolute;
 
-    width:4px;
-    height:4px;
+    transform:
 
-    background:rgba(255,255,255,.35);
+        translateY(-30px);
 
-    border-radius:50%;
+
 
     animation:
-    dustFloat linear infinite;
+
+        logoAppear 1.5s
+
+        ease forwards;
+
+
+
 }
 
 
 
-@keyframes dustFloat {
-
-    from {
-
-        transform:
-        translateY(0)
-        translateX(0);
-
-        opacity:0;
-
-    }
+@keyframes logoAppear {
 
 
-    20% {
+    to {
+
 
         opacity:1;
 
-    }
-
-
-    80% {
-
-        opacity:.7;
-
-    }
-
-
-    to {
 
         transform:
-        translateY(-120px)
-        translateX(40px);
 
-        opacity:0;
+            translateY(0);
+
+
 
     }
+
 
 }
 
 
-/* Плавное дыхание */
 
-.hero-background {
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+
+.description {
+
+
+    max-width:850px;
+
+
+    margin-top:40px;
+
+
+
+    font-size:22px;
+
+
+    line-height:1.6;
+
+
+
+    color:
+
+        rgba(255,255,255,.85);
+
+
+
+    text-shadow:
+
+
+        0 3px 15px rgba(0,0,0,.8);
+
+
+
+    opacity:0;
+
 
     animation:
-    backgroundBreathing 25s infinite alternate ease-in-out;
+
+
+        fadeUp 1.5s
+
+        .5s
+
+        ease forwards;
+
+
 
 }
 
 
-@keyframes backgroundBreathing {
 
-
-    from {
-
-        transform:scale(1);
-
-    }
+@keyframes fadeUp {
 
 
     to {
 
-        transform:scale(1.04);
+
+        opacity:1;
+
+
+        transform:
+
+            translateY(0);
+
+
 
     }
 
-}
-/* =================================
-   DRAFTIX ATMOSPHERE v0.3 PART 2
-================================= */
-
-
-/* HEADER */
-
-
-.game-header {
-
-position:fixed;
-
-top:0;
-left:0;
-
-width:100%;
-
-height:80px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:0 60px;
-
-
-z-index:20;
-
-
-background:
-
-linear-gradient(
-180deg,
-rgba(10,15,25,.85),
-transparent
-);
-
-
-backdrop-filter:blur(8px);
-
-
-animation:
-headerAppear 1.2s ease forwards;
-
 
 }
 
 
 
-@keyframes headerAppear {
+/* =====================================================
+   BUTTON
+===================================================== */
 
 
-from{
-
-opacity:0;
-
-transform:
-translateY(-30px);
-
-}
+.play-button {
 
 
-to{
-
-opacity:1;
-
-transform:
-translateY(0);
-
-}
+    margin-top:50px;
 
 
-}
+    padding:
+
+
+        18px 45px;
 
 
 
-.header-logo {
+    border-radius:14px;
 
 
-font-size:32px;
 
-font-weight:900;
-
-
-letter-spacing:4px;
+    text-decoration:none;
 
 
-color:#d6b36a;
+    color:#1b1205;
 
 
-text-shadow:
 
-0 0 20px rgba(214,179,106,.4);
+    font-size:18px;
+
+
+    font-weight:700;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            135deg,
+
+            #f0cf7a,
+
+            #a56b25
+
+        );
+
+
+
+
+    box-shadow:
+
+
+        0 0 25px
+
+        rgba(230,180,70,.45);
+
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+
+    transition:
+
+        .3s;
+
+
+
+    opacity:0;
+
+
+    animation:
+
+
+        fadeUp 1.5s
+
+        1s
+
+        ease forwards;
+
 
 
 }
 
 
 
+.play-button:hover {
 
-.game-nav {
 
+    transform:
 
-display:flex;
+        translateY(-5px)
 
-gap:45px;
+        scale(1.05);
 
 
-}
 
+    box-shadow:
 
 
-.game-nav a {
+        0 0 45px
 
-
-color:#d7d7d7;
-
-text-decoration:none;
-
-font-size:16px;
-
-
-transition:.3s;
-
-
-}
-
-
-
-.game-nav a:hover {
-
-
-color:#e7c477;
-
-
-}
-
-
-
-
-.header-button {
-
-
-padding:
-
-12px 28px;
-
-
-border-radius:12px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#c59b4a,
-#8b6325
-);
-
-
-color:white;
-
-text-decoration:none;
-
-
-font-weight:bold;
-
-
-box-shadow:
-
-0 0 20px rgba(197,155,74,.4);
-
-
-transition:.35s;
-
-
-}
-
-
-
-.header-button:hover {
-
-
-transform:
-translateY(-3px)
-scale(1.05);
-
-
-box-shadow:
-
-0 0 35px rgba(197,155,74,.8);
-
-
-}
-
-
-
-
-
-/* HERO BUTTON */
-
-
-.gold-button {
-
-
-display:inline-flex;
-
-
-padding:
-
-18px 45px;
-
-
-border-radius:14px;
-
-
-background:
-
-linear-gradient(
-135deg,
-#d8ad55,
-#8e6225
-);
-
-
-color:white;
-
-
-font-weight:700;
-
-
-font-size:18px;
-
-
-text-decoration:none;
-
-
-position:relative;
-
-
-overflow:hidden;
-
-
-transition:.35s;
-
-
-
-box-shadow:
-
-
-0 0 25px
-rgba(216,173,85,.35);
-
-
-}
-
-
-
-.gold-button:hover{
-
-
-transform:
-
-translateY(-5px)
-scale(1.04);
-
-
-box-shadow:
-
-
-0 0 50px
-rgba(216,173,85,.8);
+        rgba(230,180,70,.8);
 
 
 
@@ -427,45 +449,125 @@ rgba(216,173,85,.8);
 
 
 
-.gold-button::before{
+.play-button::before {
 
 
-content:"";
+    content:"";
 
 
-position:absolute;
+    position:absolute;
 
 
-top:0;
+    top:0;
 
-left:-120%;
-
-
-width:70%;
-
-
-height:100%;
-
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.35),
-transparent
-);
-
-
-transform:
-
-skewX(-25deg);
+    left:-120%;
 
 
 
-animation:
+    width:70%;
 
-buttonShine 5s infinite;
+
+    height:100%;
+
+
+
+    background:
+
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.5),
+
+            transparent
+
+        );
+
+
+
+    transform:
+
+        skewX(-25deg);
+
+
+
+    animation:
+
+
+        shine 4s infinite;
+
+
+
+}
+
+
+
+@keyframes shine {
+
+
+    0% {
+
+
+        left:-120%;
+
+
+    }
+
+
+    30%,100% {
+
+
+        left:150%;
+
+
+    }
+
+
+}
+
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+
+footer {
+
+
+    position:fixed;
+
+
+    bottom:25px;
+
+
+    left:0;
+
+
+    width:100%;
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:15px;
+
+
+
+    font-size:14px;
+
+
+
+    color:
+
+        rgba(255,255,255,.65);
 
 
 
@@ -473,57 +575,88 @@ buttonShine 5s infinite;
 
 
 
-@keyframes buttonShine {
+footer a {
 
 
-0%{
+    color:
 
-left:-120%;
-
-}
-
-
-20%,100%{
-
-left:150%;
-
-}
+        rgba(255,255,255,.75);
 
 
 
-}
-/* SCROLL REVEAL */
+    text-decoration:none;
 
 
-.reveal {
 
-
-opacity:0;
-
-
-transform:
-
-translateY(50px);
-
-
-transition:
-
-1s ease;
+    transition:.3s;
 
 
 }
 
 
 
-.reveal.active {
+footer a:hover {
 
 
-opacity:1;
+    color:#f0cf7a;
 
 
-transform:
+}
 
-translateY(0);
+
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+
+@media(max-width:700px){
+
+
+
+    .description {
+
+
+        font-size:17px;
+
+
+        max-width:90%;
+
+
+    }
+
+
+
+
+    .play-button {
+
+
+        font-size:16px;
+
+
+        padding:
+
+            16px 30px;
+
+
+
+    }
+
+
+
+    footer {
+
+
+        font-size:12px;
+
+
+        gap:8px;
+
+
+
+    }
+
 
 
 }
