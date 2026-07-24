@@ -1,138 +1,243 @@
-// ==========================
-// Draftix Atmosphere v0.3
-// ==========================
+/* =====================================================
+   DRAFTIX SIMPLE LANDING PAGE
+   JavaScript
+===================================================== */
 
 
 
-// Создание частиц пыли
-
-const dustContainer =
-document.querySelector(".dust-container");
-
-
-if(dustContainer){
+// =====================================================
+// FLOATING DUST PARTICLES
+// =====================================================
 
 
-for(let i = 0; i < 45; i++){
+const particlesContainer = 
+document.querySelector(".particles");
 
 
-const dust =
-document.createElement("div");
+
+if (particlesContainer) {
 
 
-dust.className="dust";
+    const particleCount = 45;
 
 
-dust.style.left =
-Math.random()*100+"%";
+
+    for (let i = 0; i < particleCount; i++) {
 
 
-dust.style.top =
-Math.random()*100+"%";
+        const particle = document.createElement("span");
 
 
-dust.style.animationDuration =
-(8 + Math.random()*12)+"s";
+        particle.className = "particle";
 
 
-dust.style.animationDelay =
-Math.random()*10+"s";
+
+        particle.style.left = 
+            Math.random() * 100 + "%";
 
 
-dustContainer.appendChild(dust);
+
+        particle.style.top = 
+            Math.random() * 100 + "%";
+
+
+
+        const size = 
+            Math.random() * 4 + 2;
+
+
+
+        particle.style.width =
+            size + "px";
+
+
+        particle.style.height =
+            size + "px";
+
+
+
+        particle.style.animationDuration =
+            (8 + Math.random() * 15) + "s";
+
+
+
+        particle.style.animationDelay =
+            Math.random() * 10 + "s";
+
+
+
+        particlesContainer.appendChild(particle);
+
+
+    }
 
 
 }
 
+
+
+// =====================================================
+// ADD PARTICLE STYLE
+// =====================================================
+
+
+const style = document.createElement("style");
+
+
+style.innerHTML = `
+
+
+.particle {
+
+
+    position:absolute;
+
+
+    background:
+
+        rgba(255,230,160,.45);
+
+
+
+    border-radius:50%;
+
+
+
+    filter:blur(.5px);
+
+
+
+    animation:
+
+        particleMove
+
+        linear
+
+        infinite;
+
+
+
 }
 
 
 
-
-// Параллакс
-
-
-const atmosphere =
-document.querySelector(".atmosphere");
+@keyframes particleMove {
 
 
-if(atmosphere){
+    0% {
 
 
-document.addEventListener(
-"mousemove",
-(e)=>{
+        transform:
 
-
-const x =
-(e.clientX /
-window.innerWidth - 0.5);
-
-
-const y =
-(e.clientY /
-window.innerHeight - 0.5);
+            translateY(40px);
 
 
 
-atmosphere.style.transform =
-`
-translate(
-${x*20}px,
-${y*20}px
-)
+        opacity:0;
+
+
+
+    }
+
+
+
+    20% {
+
+
+        opacity:1;
+
+
+
+    }
+
+
+
+    80% {
+
+
+        opacity:.7;
+
+
+
+    }
+
+
+
+    100% {
+
+
+        transform:
+
+            translate(
+
+                80px,
+
+                -200px
+
+            );
+
+
+
+        opacity:0;
+
+
+
+    }
+
+
+}
+
+
+
 `;
 
 
 
+document.head.appendChild(style);
+
+
+
+
+
+// =====================================================
+// SIMPLE MOUSE PARALLAX
+// =====================================================
+
+
+
+const background = 
+document.querySelector(".background");
+
+
+
+document.addEventListener(
+"mousemove",
+(event)=>{
+
+
+    if(!background) return;
+
+
+
+    const x = 
+        (event.clientX / window.innerWidth - .5);
+
+
+
+    const y =
+        (event.clientY / window.innerHeight - .5);
+
+
+
+    background.style.transform =
+
+        `
+        scale(1.06)
+        translate(
+            ${x * 15}px,
+            ${y * 15}px
+        )
+        `;
+
+
 });
-
-
-}
-// ========================
-// Scroll Reveal
-// ========================
-
-
-const revealElements =
-document.querySelectorAll(".reveal");
-
-
-
-function revealOnScroll(){
-
-
-const trigger =
-window.innerHeight * 0.85;
-
-
-
-revealElements.forEach(el=>{
-
-
-const top =
-el.getBoundingClientRect().top;
-
-
-
-if(top < trigger){
-
-el.classList.add("active");
-
-}
-
-
-});
-
-
-}
-
-
-
-window.addEventListener(
-"scroll",
-revealOnScroll
-);
-
-
-revealOnScroll();
